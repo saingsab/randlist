@@ -44,6 +44,7 @@
       background-color: #0070f3;
       border-radius: 5px;
       word-wrap: break-word; /* Wrap long URLs */
+      text-align: center;
     }
     .link-item a:hover {
       background-color: #005bb5;
@@ -51,7 +52,7 @@
   </style>
 </head>
 <body>
-  <button id="generateButton">Generate Random Links</button>
+  <button id="generateButton">Generate Random Link</button>
   <ul id="linkList" class="link-list"></ul>
 
   <script>
@@ -63,30 +64,21 @@
       'https://www.facebook.com',
     ];
 
-    function generateRandomLinks() {
-      const randomLinks = [];
-      const usedIndices = new Set();
-      while (randomLinks.length < 3) { // Limit to 3 links
-        const randomIndex = Math.floor(Math.random() * links.length);
-        if (!usedIndices.has(randomIndex)) {
-          usedIndices.add(randomIndex);
-          randomLinks.push(links[randomIndex]);
-        }
-      }
+    function generateRandomLink() {
+      const randomIndex = Math.floor(Math.random() * links.length);
+      const randomLink = links[randomIndex];
 
-      alert(`Generated Links:\n${randomLinks.join('\n')}`);
+      alert(`Generated Link: ${randomLink}`);
 
       const linkList = document.getElementById('linkList');
-      linkList.innerHTML = ''; // Clear previous links
-      randomLinks.forEach(link => {
-        const listItem = document.createElement('li');
-        listItem.classList.add('link-item');
-        listItem.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer">${link}</a>`;
-        linkList.appendChild(listItem);
-      });
+      linkList.innerHTML = ''; // Clear previous link
+      const listItem = document.createElement('li');
+      listItem.classList.add('link-item');
+      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
+      linkList.appendChild(listItem);
     }
 
-    document.getElementById('generateButton').addEventListener('click', generateRandomLinks);
+    document.getElementById('generateButton').addEventListener('click', generateRandomLink);
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
