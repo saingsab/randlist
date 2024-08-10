@@ -29,17 +29,21 @@
       margin-top: 20px;
       list-style: none;
       padding: 0;
+      width: 100%;
+      max-width: 600px;
     }
     .link-item {
       margin: 5px 0;
     }
     .link-item a {
-      padding: 10px 20px;
+      display: block;
+      padding: 10px;
       font-size: 16px;
       text-decoration: none;
       color: white;
       background-color: #0070f3;
       border-radius: 5px;
+      word-wrap: break-word; /* Wrap long URLs */
     }
     .link-item a:hover {
       background-color: #005bb5;
@@ -51,7 +55,6 @@
   <ul id="linkList" class="link-list"></ul>
 
   <script>
-    // Array of links
     const links = [
       'https://www.example.com',
       'https://www.google.com',
@@ -60,11 +63,10 @@
       'https://www.facebook.com',
     ];
 
-    // Function to generate random links and show them
     function generateRandomLinks() {
       const randomLinks = [];
       const usedIndices = new Set();
-      while (randomLinks.length < Math.min(links.length, 5)) {
+      while (randomLinks.length < 3) { // Limit to 3 links
         const randomIndex = Math.floor(Math.random() * links.length);
         if (!usedIndices.has(randomIndex)) {
           usedIndices.add(randomIndex);
@@ -72,7 +74,7 @@
         }
       }
 
-      // alert(`Generated Links:\n${randomLinks.join('\n')}`);
+      alert(`Generated Links:\n${randomLinks.join('\n')}`);
 
       const linkList = document.getElementById('linkList');
       linkList.innerHTML = ''; // Clear previous links
@@ -84,10 +86,8 @@
       });
     }
 
-    // Add event listener to the button
     document.getElementById('generateButton').addEventListener('click', generateRandomLinks);
 
-    // Register the service worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js')
