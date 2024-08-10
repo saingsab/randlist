@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Link Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #0070f3;
+      border-radius: 5px;
+      background-color: #0070f3;
+      color: white;
+    }
+    button:hover {
+      background-color: #005bb5;
+    }
+    .link-list {
+      margin-top: 20px;
+      list-style: none;
+      padding: 0;
+    }
+    .link-item {
+      margin: 5px 0;
+    }
+    .link-item a {
+      padding: 10px 20px;
+      font-size: 16px;
+      text-decoration: none;
+      color: white;
+      background-color: #0070f3;
+      border-radius: 5px;
+    }
+    .link-item a:hover {
+      background-color: #005bb5;
+    }
+  </style>
+</head>
+<body>
+  <button id="generateButton">Generate Random Links</button>
+  <ul id="linkList" class="link-list"></ul>
+
+  <script>
+    // Array of links
+    const links = [
+      'https://li.sten.to/embed/xeft6v4v',
+      'https://li.sten.to/embed/a0q0m130',
+    ];
+
+    // Function to generate random links and show them
+    function generateRandomLinks() {
+      // Create a random list of links (e.g., first 3 links randomly selected)
+      const randomLinks = [];
+      const usedIndices = new Set();
+      while (randomLinks.length < Math.min(links.length, 1)) {
+        const randomIndex = Math.floor(Math.random() * links.length);
+        if (!usedIndices.has(randomIndex)) {
+          usedIndices.add(randomIndex);
+          randomLinks.push(links[randomIndex]);
+        }
+      }
+
+      // Show an alert with the generated links
+    //   alert(`Generated Links:\n${randomLinks.join('\n')}`);
+
+      // Display the links
+      const linkList = document.getElementById('linkList');
+      linkList.innerHTML = ''; // Clear previous links
+      randomLinks.forEach(link => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('link-item');
+        listItem.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer">${link}</a>`;
+        linkList.appendChild(listItem);
+      });
+    }
+
+    // Add event listener to the button
+    document.getElementById('generateButton').addEventListener('click', generateRandomLinks);
+  </script>
+</body>
+</html>
