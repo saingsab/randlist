@@ -12,6 +12,7 @@
       flex-direction: column;
       align-items: center;
       margin-top: 50px;
+      padding: 10px; /* Add padding to prevent content from touching edges */
     }
     button {
       padding: 10px 20px;
@@ -21,6 +22,9 @@
       border-radius: 5px;
       background-color: #0070f3;
       color: white;
+      width: 100%; /* Make button responsive */
+      max-width: 300px; /* Limit the button width on large screens */
+      text-align: center; /* Center text within the button */
     }
     button:hover {
       background-color: #005bb5;
@@ -68,7 +72,7 @@
       const randomIndex = Math.floor(Math.random() * links.length);
       const randomLink = links[randomIndex];
 
-      alert(`Generated Link: ${randomLink}`);
+      // alert(`Generated Link: ${randomLink}`);
 
       const linkList = document.getElementById('linkList');
       linkList.innerHTML = ''; // Clear previous link
