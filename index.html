@@ -31,20 +31,20 @@
       padding: 0;
       width: 100%;
       max-width: 600px;
+      text-align: center;
     }
     .link-item {
       margin: 5px 0;
     }
     .link-item a {
-      display: block;
+      display: inline-block;
       padding: 10px;
       font-size: 16px;
       text-decoration: none;
       color: white;
       background-color: #0070f3;
       border-radius: 5px;
-      word-wrap: break-word; /* Wrap long URLs */
-      text-align: center;
+      word-wrap: break-word;
     }
     .link-item a:hover {
       background-color: #005bb5;
@@ -72,6 +72,7 @@
 
       const linkList = document.getElementById('linkList');
       linkList.innerHTML = ''; // Clear previous link
+
       const listItem = document.createElement('li');
       listItem.classList.add('link-item');
       listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
