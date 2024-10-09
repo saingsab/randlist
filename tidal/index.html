@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Link Generator</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+      padding: 10px; /* Add padding to prevent content from touching edges */
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #0070f3;
+      border-radius: 5px;
+      background-color: #0070f3;
+      color: white;
+      width: 100%; /* Make button responsive */
+      max-width: 300px; /* Limit the button width on large screens */
+      text-align: center; /* Center text within the button */
+    }
+    button:hover {
+      background-color: #005bb5;
+    }
+    .link-list {
+      margin-top: 20px;
+      list-style: none;
+      padding: 0;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+    .link-item {
+      margin: 5px 0;
+    }
+    .link-item a {
+      display: inline-block;
+      padding: 10px;
+      font-size: 16px;
+      text-decoration: none;
+      color: white;
+      background-color: #0070f3;
+      border-radius: 5px;
+      word-wrap: break-word;
+    }
+    .link-item a:hover {
+      background-color: #005bb5;
+    }
+  </style>
+</head>
+<body>
+  <button id="generateButton">Generate Random Link</button>
+  <ul id="linkList" class="link-list"></ul>
+
+  <script>
+    const links = [
+      'https://li.sten.to/64e8s048/apple-music',
+      'https://li.sten.to/jtukxiqu/apple-music',
+    ];
+
+    function generateRandomLink() {
+      const randomIndex = Math.floor(Math.random() * links.length);
+      const randomLink = links[randomIndex];
+
+      const linkList = document.getElementById('linkList');
+      linkList.innerHTML = ''; // Clear previous link
+
+      const listItem = document.createElement('li');
+      listItem.classList.add('link-item');
+      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
+      linkList.appendChild(listItem);
+    }
+
+    document.getElementById('generateButton').addEventListener('click', generateRandomLink);
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
