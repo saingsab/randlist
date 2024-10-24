@@ -56,19 +56,25 @@
   </style>
 </head>
 <body>
-  <button id="generateButton">Generate Random Link</button>
+  <button id="generateButtonTidal">Tidal Random Link</button>
+    <br>
+  <button id="generateButtonDeezer">Deezer Random Link</button>
+    <br>
+  <button id="generateButtonYouTube">YouTube Random Link</button>
+    <br>
+  <button id="generateButtonNapster">Napster Random Link</button>
   <ul id="linkList" class="link-list"></ul>
 
   <script>
     const links = [
-      'https://li.sten.to/64e8s048/apple-music',
-      'https://li.sten.to/jtukxiqu/apple-music',
-      'https://li.sten.to/1kh1fof6/apple-music',
-      'https://li.sten.to/xeft6v4v/apple-music',
-      'https://li.sten.to/rk1ouz5l/apple-music',
-      'https://li.sten.to/tprwknog/apple-music',
-      'https://li.sten.to/mei2oe5w/apple-music',
-      'https://li.sten.to/bbu5qogw/apple-music',
+      'https://li.sten.to/c3u0sjku/tidal',
+      'https://li.sten.to/cuoj8pi9/tidal',
+      'https://li.sten.to/935er13o/tidal',
+      'https://li.sten.to/l0bguu7b/tidal',
+      'https://li.sten.to/3rv2ag8s/tidal',
+      'https://li.sten.to/7qisoung/tidal',
+      'https://li.sten.to/xzqee4pj/tidal',
+      'https://li.sten.to/wp24liei/tidal',
     ];
 
     function generateRandomLink() {
@@ -84,7 +90,7 @@
       linkList.appendChild(listItem);
     }
 
-    document.getElementById('generateButton').addEventListener('click', generateRandomLink);
+    document.getElementById('generateButtonTidal').addEventListener('click', generateRandomLink);
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -97,6 +103,90 @@
           });
       });
     }
+  </script>
+<!--Link Deezer-->
+  <script>
+    const deezerLinks = [
+      'https://deezer.page.link/HZUxQGi3avmPkQq79',
+      'https://deezer.page.link/TLZ3VmKzP1qjah5R6',
+      'https://deezer.page.link/bxCkm4Jx5Xz2JyBY6',
+      'https://deezer.page.link/TLUt1DtN5YVC6s3u6',
+      'https://deezer.page.link/S3ZJSsRVEKzsEEhv5',
+      'https://deezer.page.link/Nwx6iffr26xTzPro9',
+      'https://deezer.page.link/V288fPU3QTQXw6w98',
+      'https://deezer.page.link/Q1RNgEfQVuE36jJS9',
+    ];
+
+    function generateRandomDeezerLink() {
+      const randomIndex = Math.floor(Math.random() * deezerLinks.length);
+      const randomLink = deezerLinks[randomIndex];
+
+      const linkList = document.getElementById('linkList');
+      linkList.innerHTML = ''; // Clear previous link
+
+      const listItem = document.createElement('li');
+      listItem.classList.add('link-item');
+      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
+      linkList.appendChild(listItem);
+    }
+
+    document.getElementById('generateButtonDeezer').addEventListener('click', generateRandomDeezerLink);
+  </script>
+<!--Youtube-->
+  <script>
+    const youtubeLinks = [
+      // 'https://li.sten.to/1fbdqvrt/youtube-music',
+      // 'https://li.sten.to/fqkuzsdg/youtube-music',
+      // 'https://li.sten.to/qum5io1m/youtube-music',
+      // 'https://li.sten.to/xreejgis/youtube-music',
+      // 'https://li.sten.to/q87sqhjz/youtube-music',
+      'sabb song',
+      'zara dana',
+      'Lakesha Dekson',
+    ];
+
+    function generateRandomYouTubeLink() {
+      const randomIndex = Math.floor(Math.random() * youtubeLinks.length);
+      const randomLink = youtubeLinks[randomIndex];
+
+      const linkList = document.getElementById('linkList');
+      linkList.innerHTML = ''; // Clear previous link
+
+      const listItem = document.createElement('li');
+      listItem.classList.add('link-item');
+      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
+      linkList.appendChild(listItem);
+    }
+
+    document.getElementById('generateButtonYouTube').addEventListener('click', generateRandomYouTubeLink);
+  </script>
+<!--Napster-->
+  <script>
+    const napsterLinks = [
+      'https://li.sten.to/napster1',
+      'https://li.sten.to/napster2',
+      'https://li.sten.to/napster3',
+      'https://li.sten.to/napster4',
+      'https://li.sten.to/napster5',
+      'https://li.sten.to/napster6',
+      'https://li.sten.to/napster7',
+      'https://li.sten.to/napster8',
+    ];
+
+    function generateRandomNapsterLink() {
+      const randomIndex = Math.floor(Math.random() * napsterLinks.length);
+      const randomLink = napsterLinks[randomIndex];
+
+      const linkList = document.getElementById('linkList');
+      linkList.innerHTML = ''; // Clear previous link
+
+      const listItem = document.createElement('li');
+      listItem.classList.add('link-item');
+      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
+      linkList.appendChild(listItem);
+    }
+
+    document.getElementById('generateButtonNapster').addEventListener('click', generateRandomNapsterLink);
   </script>
 </body>
 </html>
