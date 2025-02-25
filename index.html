@@ -62,7 +62,7 @@
     <br>
   <button id="generateButtonYouTube">YouTube Random Link</button>
     <br>
-  <button id="generateButtonNapster">Napster Random Link</button>
+  <button id="generateButtonApple">Apple Random Link</button>
   <ul id="linkList" class="link-list"></ul>
 
   <script>
@@ -159,22 +159,21 @@
 
     document.getElementById('generateButtonYouTube').addEventListener('click', generateRandomYouTubeLink);
   </script>
-<!--Napster-->
+<!--Apple-->
   <script>
-    const napsterLinks = [
-      'https://li.sten.to/napster1',
-      'https://li.sten.to/napster2',
-      'https://li.sten.to/napster3',
-      'https://li.sten.to/napster4',
-      'https://li.sten.to/napster5',
-      'https://li.sten.to/napster6',
-      'https://li.sten.to/napster7',
-      'https://li.sten.to/napster8',
+    const appleLinks = [
+      'https://li.sten.to/6p0n40em/apple-music',
+      'https://li.sten.to/4p2mjc6p/apple-music',
+      'https://li.sten.to/dex0tuak/apple-music',
+      'https://li.sten.to/8xwywq7o/apple-music',
+      'https://li.sten.to/95bb1lec/apple-music',
+      'https://li.sten.to/n3fc8kox/apple-music',
+      'https://li.sten.to/3vm4h7rx/apple-music',
     ];
 
-    function generateRandomNapsterLink() {
-      const randomIndex = Math.floor(Math.random() * napsterLinks.length);
-      const randomLink = napsterLinks[randomIndex];
+    function generateRandomAppleLink() {
+      const randomIndex = Math.floor(Math.random() * appleLinks.length);
+      const randomLink = appleLinks[randomIndex];
 
       const linkList = document.getElementById('linkList');
       linkList.innerHTML = ''; // Clear previous link
@@ -185,7 +184,7 @@
       linkList.appendChild(listItem);
     }
 
-    document.getElementById('generateButtonNapster').addEventListener('click', generateRandomNapsterLink);
+    document.getElementById('generateButtonApple').addEventListener('click', generateRandomAppleLink);
   </script>
 </body>
 </html>
