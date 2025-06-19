@@ -3,99 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Link Generator</title>
-  <link rel="manifest" href="manifest.json">
+  <title>Random List Generator</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #e0eaff 0%, #b3cfff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: rgba(255,255,255,0.85);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(51,153,255,0.10);
+      padding: 2em 1.5em;
+      max-width: 95vw;
+      width: 350px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 50px;
-      padding: 10px; /* Add padding to prevent content from touching edges */
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      margin-bottom: 1em;
+      width: 100%;
+    }
+    #randomText {
+      width: 100%;
+      min-width: 0;
+      padding: 0.5em;
+      border: 2px solid #3399ff;
+      border-radius: 6px;
+      background: #f7fbff;
+      color: #1a237e;
+      font-size: 1.1em;
+      transition: border 0.2s;
+      flex: 1;
+    }
+    #randomText:focus {
+      border: 2px solid #1976d2;
+      outline: none;
     }
     button {
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 0.5em 1.2em;
+      background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
       cursor: pointer;
-      border: 1px solid #0070f3;
-      border-radius: 5px;
-      background-color: #0070f3;
-      color: white;
-      width: 100%; /* Make button responsive */
-      max-width: 300px; /* Limit the button width on large screens */
-      text-align: center; /* Center text within the button */
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+      transition: background 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
     }
     button:hover {
-      background-color: #005bb5;
+      background: linear-gradient(90deg, #1565c0 0%, #1e88e5 100%);
+      box-shadow: 0 4px 16px rgba(25, 118, 210, 0.15);
     }
-    .link-list {
-      margin-top: 20px;
-      list-style: none;
-      padding: 0;
+    .actions {
+      margin-top: 1em;
       width: 100%;
-      max-width: 600px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
     }
-    .link-item {
-      margin: 5px 0;
-    }
-    .link-item a {
-      display: inline-block;
-      padding: 10px;
-      font-size: 16px;
-      text-decoration: none;
-      color: white;
-      background-color: #0070f3;
-      border-radius: 5px;
-      word-wrap: break-word;
-    }
-    .link-item a:hover {
-      background-color: #005bb5;
+    @media (max-width: 500px) {
+      .container {
+        padding: 1em 0.5em;
+        width: 98vw;
+        min-width: 0;
+      }
+      .row {
+        flex-direction: column;
+        gap: 0.5em;
+        margin-bottom: 1em;
+      }
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <button id="generateButton">Generate Random Link</button>
-  <ul id="linkList" class="link-list"></ul>
-
+  <div class="container">
+    <div class="row">
+      <input type="text" id="randomText" readonly>
+      <button onclick="copyToClipboard()">Copy</button>
+      <span id="copyIndicator" style="margin-left:8px;color:#1976d2;font-size:0.95em;display:none;">Copied!</span>
+    </div>
+    <div class="actions">
+      <button onclick="generateRandomText()">Generate Random Text</button>
+    </div>
+  </div>
   <script>
-    const links = [
-      'https://li.sten.to/c3u0sjku/tidal',
-      'https://li.sten.to/cuoj8pi9/tidal',
-      'https://li.sten.to/935er13o/tidal',
-      'https://li.sten.to/l0bguu7b/tidal',
-      'https://li.sten.to/3rv2ag8s/tidal',
-      'https://li.sten.to/7qisoung/tidal',
-      'https://li.sten.to/xzqee4pj/tidal',
-      'https://li.sten.to/wp24liei/tidal',
+    const textList = [
+        "Heartland Stories, Russell Herren",
+        "Urban Oasis, Brian Diaz",
+        "Where The Tea Grows Cold, Marge Santu",
+        "Tiny Joys, Ryan Foust",
+        "INNER PEACE, AFNNETTE GARCIA",
+        "Sweet Journey, Brandon Carrasco",
+        "WILDFLOWER, George Cook",
+        "Road To Nowhere, Alicia Kress",
+        "MIDNIGHT WHISPER, Tommy Brower",
+        "Equimnox Vibes, Joseph Kolar",
+        "STILLNESS, forrrest-oliver",
+        "The Farmer's Way, James Juarezi",
+        "Desert Glow Paris Nemeth",
+        "Sweet Little Knife Morris Chadwell"
+
     ];
-
-    function generateRandomLink() {
-      const randomIndex = Math.floor(Math.random() * links.length);
-      const randomLink = links[randomIndex];
-
-      const linkList = document.getElementById('linkList');
-      linkList.innerHTML = ''; // Clear previous link
-
-      const listItem = document.createElement('li');
-      listItem.classList.add('link-item');
-      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
-      linkList.appendChild(listItem);
+    function generateRandomText() {
+      const random = textList[Math.floor(Math.random() * textList.length)];
+      document.getElementById('randomText').value = random;
     }
-
-    document.getElementById('generateButton').addEventListener('click', generateRandomLink);
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-          .then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
-          })
-          .catch((error) => {
-            console.error('Service Worker registration failed:', error);
-          });
-      });
+    function copyToClipboard() {
+      const textBox = document.getElementById('randomText');
+      textBox.select();
+      textBox.setSelectionRange(0, 99999); // For mobile devices
+      document.execCommand('copy');
+      const indicator = document.getElementById('copyIndicator');
+      indicator.style.display = 'inline';
+      setTimeout(() => { indicator.style.display = 'none'; }, 1200);
     }
   </script>
 </body>
