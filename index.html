@@ -3,216 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Link Generator</title>
-  <link rel="manifest" href="manifest.json">
+  <title>Random List Generator</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #e0eaff 0%, #b3cfff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: rgba(255,255,255,0.85);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(51,153,255,0.10);
+      padding: 2em 1.5em;
+      max-width: 95vw;
+      width: 350px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 50px;
-      padding: 10px; /* Add padding to prevent content from touching edges */
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      margin-bottom: 1em;
+      width: 100%;
+    }
+    #randomText {
+      width: 100%;
+      min-width: 0;
+      padding: 0.5em;
+      border: 2px solid #3399ff;
+      border-radius: 6px;
+      background: #f7fbff;
+      color: #1a237e;
+      font-size: 1.1em;
+      transition: border 0.2s;
+      flex: 1;
+    }
+    #randomText:focus {
+      border: 2px solid #1976d2;
+      outline: none;
     }
     button {
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 0.5em 1.2em;
+      background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
       cursor: pointer;
-      border: 1px solid #0070f3;
-      border-radius: 5px;
-      background-color: #0070f3;
-      color: white;
-      width: 100%; /* Make button responsive */
-      max-width: 300px; /* Limit the button width on large screens */
-      text-align: center; /* Center text within the button */
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+      transition: background 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
     }
     button:hover {
-      background-color: #005bb5;
+      background: linear-gradient(90deg, #1565c0 0%, #1e88e5 100%);
+      box-shadow: 0 4px 16px rgba(25, 118, 210, 0.15);
     }
-    .link-list {
-      margin-top: 20px;
-      list-style: none;
-      padding: 0;
+    .actions {
+      margin-top: 1em;
       width: 100%;
-      max-width: 600px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
     }
-    .link-item {
-      margin: 5px 0;
-    }
-    .link-item a {
-      display: inline-block;
-      padding: 10px;
-      font-size: 16px;
-      text-decoration: none;
-      color: white;
-      background-color: #0070f3;
-      border-radius: 5px;
-      word-wrap: break-word;
-    }
-    .link-item a:hover {
-      background-color: #005bb5;
+    @media (max-width: 500px) {
+      .container {
+        padding: 1em 0.5em;
+        width: 98vw;
+        min-width: 0;
+      }
+      .row {
+        flex-direction: column;
+        gap: 0.5em;
+        margin-bottom: 1em;
+      }
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <button id="generateButtonTidal">Tidal Random Link</button>
-    <br>
-  <button id="generateButtonDeezer">Deezer Random Link</button>
-    <br>
-  <button id="generateButtonYouTube">YouTube Random Link</button>
-    <br>
-  <button id="generateButtonApple">Apple Random Link</button>
-  <ul id="linkList" class="link-list"></ul>
-
+  <div class="container">
+    <div class="row">
+      <input type="text" id="randomText" readonly>
+      <button onclick="copyToClipboard()">Copy</button>
+      <span id="copyIndicator" style="margin-left:8px;color:#1976d2;font-size:0.95em;display:none;">Copied!</span>
+    </div>
+    <div class="actions">
+      <button onclick="generateRandomText()">Generate Random Text</button>
+    </div>
+  </div>
   <script>
-    const links = [
-      'https://li.sten.to/jqfv8y8j/tidal',
-      'https://li.sten.to/6z1ccche/tidal',
-      'https://li.sten.to/izs4uo4r/tidal',
-      'https://li.sten.to/ex90tj0j/tidal',
-      'https://li.sten.to/dobc46tj/tidal',
-      'https://li.sten.to/gph64zoh/tidal',
-      'https://li.sten.to/khswfe2c/tidal',
-      'https://li.sten.to/63g1keii/tidal',
-      'https://li.sten.to/snzueivp/tidal',
-      'https://li.sten.to/zxukdifm/tidal',
-      'https://li.sten.to/k1jhus6o/tidal',
-      'https://li.sten.to/u433ebyy/tidal',
-    ];
-
-    function generateRandomLink() {
-      const randomIndex = Math.floor(Math.random() * links.length);
-      const randomLink = links[randomIndex];
-
-      const linkList = document.getElementById('linkList');
-      linkList.innerHTML = ''; // Clear previous link
-
-      const listItem = document.createElement('li');
-      listItem.classList.add('link-item');
-      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
-      linkList.appendChild(listItem);
-    }
-
-    document.getElementById('generateButtonTidal').addEventListener('click', generateRandomLink);
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-          .then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
-          })
-          .catch((error) => {
-            console.error('Service Worker registration failed:', error);
-          });
-      });
-    }
-  </script>
-<!--Link Deezer-->
-  <script>
-    const deezerLinks = [
-      'https://dzr.page.link/Ft54dJzwVWiWVjMv5',
-      'https://dzr.page.link/zRz9Q7kyQxSRPmqQ6',
-      'https://dzr.page.link/Ycnts2b9mHSLZ9vc8',
-      'https://dzr.page.link/6UUkhMapRJzpNvn38',
-      'https://dzr.page.link/tLD6FeDNhbSCoJUE6',
-      'https://dzr.page.link/yHJueW5XyVjzH8xs9',
-      'https://dzr.page.link/iSe8Jimz6zUenLmt8',
-      'https://dzr.page.link/DRS67HPrNjJAT8uY8',
-      'https://dzr.page.link/XWqCWTzufGLaFHhR6',
+    const textList = [
+        "Heartland Stories, Russell Herren",
+        "Urban Oasis, Brian Diaz",
+        "Where The Tea Grows Cold, Marge Santu",
+        "Tiny Joys, Ryan Foust",
+        "INNER PEACE, AFNNETTE GARCIA",
+        "Sweet Journey, Brandon Carrasco",
+        "WILDFLOWER, George Cook",
+        "Road To Nowhere, Alicia Kress",
+        "MIDNIGHT WHISPER, Tommy Brower",
+        "Equimnox Vibes, Joseph Kolar",
+        "STILLNESS, Forrrest Oliver",
+        "Desert Glow, Paris Nemeth",
+        "Sweet Little Knife, Morris Chadwell",
+        "Golden Afterglow, John Halpern",
+        "The Farmer's Way, James Juarezi",
+        "Yuthak Nisay Oldie, Yuthak Nisay"
 
     ];
-
-    function generateRandomDeezerLink() {
-      const randomIndex = Math.floor(Math.random() * deezerLinks.length);
-      const randomLink = deezerLinks[randomIndex];
-
-      const linkList = document.getElementById('linkList');
-      linkList.innerHTML = ''; // Clear previous link
-
-      const listItem = document.createElement('li');
-      listItem.classList.add('link-item');
-      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
-      linkList.appendChild(listItem);
+    function generateRandomText() {
+      const random = textList[Math.floor(Math.random() * textList.length)];
+      document.getElementById('randomText').value = random;
     }
-
-    document.getElementById('generateButtonDeezer').addEventListener('click', generateRandomDeezerLink);
-  </script>
-<!--Youtube-->
-  <script>
-    const youtubeLinks = [
-      'https://li.sten.to/fqkuzsdg/youtube-music',
-      'https://li.sten.to/qum5io1m/youtube-music',
-      'https://li.sten.to/xreejgis/youtube-music',
-      'https://li.sten.to/q87sqhjz/youtube-music',
-      'https://li.sten.to/gzg85a1t/youtube-music',
-      'https://li.sten.to/xgdirdnc/youtube-music',
-      'https://li.sten.to/e62kpaq1/youtube-music',
-    ];
-
-    function generateRandomYouTubeLink() {
-      const randomIndex = Math.floor(Math.random() * youtubeLinks.length);
-      const randomLink = youtubeLinks[randomIndex];
-
-      const linkList = document.getElementById('linkList');
-      linkList.innerHTML = ''; // Clear previous link
-
-      const listItem = document.createElement('li');
-      listItem.classList.add('link-item');
-      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
-      linkList.appendChild(listItem);
+    function copyToClipboard() {
+      const textBox = document.getElementById('randomText');
+      textBox.select();
+      textBox.setSelectionRange(0, 99999); // For mobile devices
+      document.execCommand('copy');
+      const indicator = document.getElementById('copyIndicator');
+      indicator.style.display = 'inline';
+      setTimeout(() => { indicator.style.display = 'none'; }, 1200);
     }
-
-    document.getElementById('generateButtonYouTube').addEventListener('click', generateRandomYouTubeLink);
-  </script>
-<!--Apple-->
-  <script>
-    const appleLinks = [
-      // 'https://li.sten.to/6p0n40em/apple-music',
-      // 'https://li.sten.to/4p2mjc6p/apple-music',
-      // 'https://li.sten.to/dex0tuak/apple-music',
-      // 'https://li.sten.to/8xwywq7o/apple-music',
-      // 'https://li.sten.to/95bb1lec/apple-music',
-      // 'https://li.sten.to/n3fc8kox/apple-music',
-      // 'https://li.sten.to/3vm4h7rx/apple-music',
-      // 'https://li.sten.to/035y65su/apple-music',
-      // 'https://li.sten.to/faqvzl6y/apple-music',
-      // 'https://li.sten.to/fq4bkzat/apple-music',
-      // 'https://li.sten.to/i4pqf3x8/apple-music',
-      'https://li.sten.to/b83efmk2/apple-music', //heartland-stories
-      'https://li.sten.to/fes10nyk/apple-music', //Urban Oasis
-      'https://li.sten.to/k90n0zvs/apple-music', //Tiny Joys
-      // 'https://li.sten.to/iuyrkvdi/apple-music', //velvet-night
-      'https://li.sten.to/ybf8nx1v/apple-music', // Sweet Journey
-      // 'https://li.sten.to/sfv1j9zp/apple-music', // winters-heart
-      'https://li.sten.to/t8g7zg1x/apple-music', // INNER PEACE
-      'https://li.sten.to/cb0piy4j/apple-music', // equimnox-vibes
-      'https://li.sten.to/tmn526cb/apple-music', // STILLNESS
-      'https://li.sten.to/ybepedku/apple-music', // WILDFLOWER
-      'https://li.sten.to/92l8zwu2/apple-music', // Road To Nowhere
-      'https://li.sten.to/n8w48eb5/apple-music', // MIDNIGHT WHISPER
-      // 'https://li.sten.to/39yewab9/apple-music', // old-village
-      'https://li.sten.to/0idqh3ph/apple-music', // The Farmer's Way
-      'https://li.sten.to/oyh2zdto/apple-music',
-      'https://li.sten.to/kjqi12u2/apple-music',
-      'https://li.sten.to/6p0n40em/apple-music', // Yuthak Nisay Oldie
-      'https://li.sten.to/y6gqwn7z/apple-music', // Sweet Little Knife
-    ];
-
-    function generateRandomAppleLink() {
-      const randomIndex = Math.floor(Math.random() * appleLinks.length);
-      const randomLink = appleLinks[randomIndex];
-
-      const linkList = document.getElementById('linkList');
-      linkList.innerHTML = ''; // Clear previous link
-
-      const listItem = document.createElement('li');
-      listItem.classList.add('link-item');
-      listItem.innerHTML = `<a href="${randomLink}" target="_blank" rel="noopener noreferrer">${randomLink}</a>`;
-      linkList.appendChild(listItem);
-    }
-
-    document.getElementById('generateButtonApple').addEventListener('click', generateRandomAppleLink);
   </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 const CACHE_NAME = 'linkgen-cache-v1';
 const urlsToCache = [
   '/',
-  'index.html',
+  'index.html.back',
   'manifest.json',
   'icon-192x192.png',
   'icon-192x192.png'
