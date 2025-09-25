@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="827477e2-a6dd-4a6e-afc7-3f34930ad1c1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tidal/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tidal/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +52,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-WS-252.25557.126" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-WS-252.26199.162" />
       </set>
     </attachedChunks>
   </component>
@@ -74,7 +74,8 @@
       <workItem from="1754666649414" duration="2095000" />
       <workItem from="1755663742938" duration="73000" />
       <workItem from="1757930275359" duration="1586000" />
-      <workItem from="1758078326439" duration="58000" />
+      <workItem from="1758078326439" duration="251000" />
+      <workItem from="1758781736744" duration="175000" />
     </task>
     <servers />
   </component>
